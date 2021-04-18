@@ -3,19 +3,32 @@ import { GraphQLServer } from "graphql-yoga";
 //Type definitions (Schema)
 const typeDefs = `
     type Query {
-        hello: String!
+        userData: User!
+        greeting(name: String): String!
+    }
+
+    type User {
+        id: ID!
         name: String!
+        email: String!
+        password: String!
+        age: Int
     }
 `;
 
 //Resolvers
 const resolvers = {
   Query: {
-    hello() {
-      return "First query";
+    userData() {
+      return {
+        id: "12309anafhqwo21",
+        name: "Sagar",
+        email: "alfj@gm.com",
+        // password: "aslfkjasf",
+      };
     },
-    name() {
-      return "Sagar Adval";
+    greeting(parent, args, context, info) {
+      return `Hello ${args.name}`;
     },
   },
 };
